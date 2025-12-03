@@ -1,13 +1,24 @@
 ---
-title: ""
-layout: landing
+weight: 1
+title: "Introduction"
+bookToc: false
+type: "docs"
 ---
 
-<div class="book-hero">
+# Introduction
 
-# Andrew's Homelab Chronicles {anchor=false}
-Stories of IT infrastructure development on my own hardware at home.
+## Hello, I'm Andrew.
 
-{{<button href="/docs/example">}}Explore{{</button>}}
+I'm a software engineer with over 7 years of industry experience in full-stack web development.
 
-</div>
+## This is a hobby project site.
+
+Its a way for me to document my exploration into IT infrastructure and DevOps on my own hardware at home.
+
+Areas of interest include:
+
+- Linux servers
+- CI/CD pipelines
+- Kubernetes
+
+
