@@ -2,6 +2,7 @@ baseURL = 'https://example.org/'
 languageCode = 'en-us'
 title = "Andrew's Homelab Chronicles"
 theme = 'hugo-book'
+enableGitInfo = true
 
 [params]
   BookSection = '*'
