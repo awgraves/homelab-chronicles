@@ -13,13 +13,12 @@ I'm a software engineer.
 
 ## This is a hobby project site.
 
-It chronicles my exploration into IT infrastructure and DevOps on my own hardware at home.
+It chronicles my exploration of IT infra and DevOps on my own hardware at home.
 
 Areas of interest include:
 
 - Linux servers
 - Networking
 - CI/CD pipelines
+- Docker
 - Kubernetes
-
-

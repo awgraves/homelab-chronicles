@@ -21,10 +21,10 @@ Debian uses [systemd](https://en.wikipedia.org/wiki/Systemd) as its init system,
 
 ![ssh enabled](/ssh_enabled.jpg)
 
-I see its running and ***enabled***, so systemd will start it automatically on boot. ✅
+I see its running and ***enabled***, so systemd will always start it on boot. ✅
 
 ## Server IP
-Next I'll need to configure the IP of my box on the network.
+Next I'll configure the IP of my box on the network.
 
 ### Whats the address?
 
@@ -34,36 +34,31 @@ I see my local network IP on the eno1 network interface (an ethernet port).
 
 ![ip a](/ip_a.jpg)
 
-### Dynamic vs Static IP
+### Dynamic IP
 
-Whenever a device connects to a network, it first asks the router for an IP address.
+This IP has been **dynamically** assigned to my box by the DHCP server used by my router.
 
-Typically, the router selects an IP **dynamically**, meaning it could change its mind each time the device reconnects.
+If my box reconnects to the network, it could receive a ***different*** IP.
 
-However, I want my box to have a **static** IP, meaning the router will reserve this IP specifically for my device.
+I don't want that. Luckily, this can be fixed.
 
-This simplifies the process of communicating with my box if its always at the same 'location'.
 
-### Router admin
-Most routers have a web UI to configure things like static IPs.
+### Reserving an IP
+Most routers come with a DHCP server and have a web UI to configure things like IP reservations.
 
-Looking at my server's current IP, I know my network is `192.168.0.0`. Therefore, my router will be at `192.168.0.1`.
+Looking at my box's current IP, I know my network is `192.168.0.0`. Therefore, my router will be at `192.168.0.1`.
 
 I enter the IP address into my laptop's web browser and am greeted with a login.
 
 ![router login](/router_login.png)
 
-From here, I can see all devices connected to my router, and I copy the MAC address for my box.
+From here, I can see all devices connected to my network, and I copy the MAC address for my box.
 
 ![mac address](/mac_addr.png)
 
-A MAC address is a unique identifier etched into the physical network hardware component on a device.
+Devices announce themselves to routers using their Mac addresses, which are unique identifiers etched into their physical networking hardware.
 
-Devices announce themselves to routers using their Mac addresses.
-
-This is how my router can distinguish between my linux box and my laptop, for example.
-
-Under my LAN settings, I successfully 'reserve' the current IP of my box.
+Under my LAN settings, I successfully reserve the current IP address for my box's MAC address.
 
 ![static ip](/static_ip.png)
 
@@ -77,11 +72,11 @@ Its time to connect!
 
 On my laptop, I attempt a standard SSH login with `ssh andrew@192.168.0.17`.
 
-After prompting me for my password, I'm connected!
+After prompting me for my password, I'm connected.
 
 ![password SSH login](/password_ssh.png)
 
-However, there is a faster (and more secure) way to connect.
+However, there is a faster (and more secure) way to authenticate.
 
 ### SSH Keys
 
@@ -95,12 +90,12 @@ The server responds to any request to connect as 'andrew' with a special challen
 
 Only a client with my private key can decrypt that message and respond appropriately.
 
-If a client answers correctly, the server trusts its really me.
+If a client responds correctly, the server trusts its really me.
 
 
 ### Generating SSH Keys
 
-I run `ssh-keygen -t ed25519` opting for the newer ed25519 key over the standard rsa.
+I run `ssh-keygen -t ed25519` opting for the newer ed25519 key type over the standard rsa.
 
 Ed25519 is recommended these days as its smaller and faster while just as secure.
 
@@ -112,13 +107,13 @@ I could manually copy it to the correct remote location on the server with `scp`
 
 But its easier to do: `ssh-copy-id -i <my public key name> andrew@192.168.0.17`
 
-Now my SSH key pairs are set and I successfully authenticate. 🔑
+Now my SSH keys are all set. 🔑
 
 ![ssh key login](/ssh_key_login.png)
 
 ### Hostname Alias
 
-Entering `192.168.0.17` to connect is tedious. 
+Typing out `192.168.0.17` to connect is tedious. 
 
 Luckily I can 'alias' this to an easier name.
 
@@ -157,3 +152,5 @@ Then reload my config with `sudo systemctl reload ssh`.
 Now when I attempt a password login from a different machine, my access is denied.
 
 ![ssh pass auth denied](/pass_auth_denied.png)
+
+SSH is 👍
