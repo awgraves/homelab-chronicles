@@ -19,7 +19,7 @@ It should already be installed per my election in Ch 1.
 
 Debian uses [systemd](https://en.wikipedia.org/wiki/Systemd) as its init system, so I run `systemctl status ssh` to check.
 
-![ssh enabled](/ssh_enabled.jpg)
+![ssh enabled](/ssh/ssh_enabled.jpg)
 
 I see its running and ***enabled***, so systemd will always start it on boot. ✅
 
@@ -32,7 +32,7 @@ Next I'll configure the IP of my box on the network.
 
 I see my local network IP on the eno1 network interface (an ethernet port).
 
-![ip a](/ip_a.jpg)
+![ip a](/ssh/ip_a.hosts: mymachines mdns_minimal [NOTFOUND=return] resolve files myhostname dnsjpg)
 
 ### Dynamic IP
 
@@ -49,18 +49,18 @@ Most routers come with a DHCP server and have a web UI to configure things like 
 Looking at my box's current IP, I know my network is `192.168.0.0`. Therefore, my router will be at `192.168.0.1`.
 
 I enter the IP address into my laptop's web browser and am greeted with a login.
-
-![router login](/router_login.png)
+hosts: mymachines mdns_minimal [NOTFOUND=return] resolve files myhostname dns
+![router login](/ssh/router_login.png)
 
 From here, I can see all devices connected to my network, and I copy the MAC address for my box.
 
-![mac address](/mac_addr.png)
+![mac address](/ssh/mac_addr.png)
 
 Devices announce themselves to routers using their Mac addresses, which are unique identifiers etched into their physical networking hardware.
 
 Under my LAN settings, I successfully reserve the current IP address for my box's MAC address.
 
-![static ip](/static_ip.png)
+![static ip](/ssh/static_ip.png)
 
 The server is ready.
 
@@ -74,12 +74,11 @@ On my laptop, I attempt a standard SSH login with `ssh andrew@192.168.0.17`.
 
 After prompting me for my password, I'm connected.
 
-![password SSH login](/password_ssh.png)
+![password SSH login](/ssh/password_ssh.png)
 
 However, there is a faster (and more secure) way to authenticate.
 
 ### SSH Keys
-<BS>
 
 These are the better login solution. 
 
@@ -110,7 +109,7 @@ But its easier to do: `ssh-copy-id -i <my public key name> andrew@192.168.0.17`
 
 Now my SSH keys are all set. 🔑
 
-![ssh key login](/ssh_key_login.png)
+![ssh key login](/ssh/ssh_key_login.png)
 
 ### Hostname Alias
 
@@ -134,7 +133,7 @@ Host homelab
 
 Now all I need to type is `ssh homelab` and I'm in.
 
-![ssh hostname alias](/ssh_alias.png)
+![ssh hostname alias](/ssh/ssh_alias.png)
 
 ## Disabling Password Auth
 
@@ -146,12 +145,12 @@ This prevents brute force password crack attempts.
 
 On my homelab box, I edit the following line on `/etc/ssh/sshd_config`:
 
-![disable ssh pass auth](/disable_ssh_pass.png)
+![disable ssh pass auth](/ssh/disable_ssh_pass.png)
 
 Then reload my config with `sudo systemctl reload ssh`.
 
 Now when I attempt a password login from a different machine, my access is denied.
 
-![ssh pass auth denied](/pass_auth_denied.png)
+![ssh pass auth denied](/ssh/pass_auth_denied.png)
 
 SSH is 👍

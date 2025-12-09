@@ -11,7 +11,7 @@ This machine will be the core of my homelab.
 
 ## Hardware
 
-<img src="/dell_desktop.jpg" style="max-width: 400px"/>
+<img src="/linux-box/dell_desktop.jpg" style="max-width: 400px"/>
 
 I have an old Dell Optiplex 7010 Desktop laying around that I had purchased off ebay back in 2022 for around $100.
 
@@ -44,7 +44,7 @@ I download the [Debian network installer ISO file](https://www.debian.org/CD/net
 
 Using the `lsblk` command, I discover the name of my attached usb drive (sda). 
 
-![find usb dev](/find_usb.png)
+![find usb dev](/linux-box/find_usb.png)
 
 I then run `sudo mkfs -t ext4 /dev/sda` to reformat my drive with an ext4 file system.
 
@@ -59,14 +59,14 @@ Lastly, I copy the debian ISO onto my drive with `sudo dd if=./debian.iso of=/de
 
 After attaching the USB to the Dell along with a spare monitor and keyboard, I turn on the power and hit f12 to enter the boot menu.
 
-![boot menu](/boot_menu.jpg)
+![boot menu](/linux-box/boot_menu.jhosts: mymachines mdns_minimal [NOTFOUND=return] resolve files myhostname dnspg)
 
 From here I select the USB drive as the boot device and enter the Debian installer.
 
 The only package I need in addition to the standard system utils is the SSH server (more on this in Ch 2)!
 
-![pkg install](/pkg_install.jpg)
+![pkg install](/linux-box/pkg_install.jpg)
 
-<img src="/debian_login.jpg" alt="debian login screen" style="max-width: 300px" />
+<img src="/linux-box/debian_login.jpg" alt="debian login screen" style="max-width: 300px" />
 
 Voila. A Linux box.
