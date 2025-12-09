@@ -79,6 +79,7 @@ After prompting me for my password, I'm connected.
 However, there is a faster (and more secure) way to authenticate.
 
 ### SSH Keys
+<BS>
 
 These are the better login solution. 
 
@@ -113,7 +114,7 @@ Now my SSH keys are all set. 🔑
 
 ### Hostname Alias
 
-Typing out `192.168.0.17` to connect is tedious. 
+It's tedious to type out `192.168.0.17` each time.
 
 Luckily I can 'alias' this to an easier name.
 
