@@ -82,4 +82,5 @@ The "[NOTFOUND=return]" on the hosts line is blocking fallback to my DNS (which 
 ![problem nsswitch](/dns/problem_nsswitch.png)
 
 So I remove that early return, and success! `homelab.lan` is reachable.
+
 ![ping homelab.lan](/dns/ping_working.png)
