@@ -32,7 +32,7 @@ Next I'll configure the IP of my box on the network.
 
 I see my local network IP on the eno1 network interface (an ethernet port).
 
-![ip a](/ssh/ip_a.hosts: mymachines mdns_minimal [NOTFOUND=return] resolve files myhostname dnsjpg)
+![ip a](/ssh/ip_a.jpg)
 
 ### Dynamic IP
 
@@ -49,7 +49,6 @@ Most routers come with a DHCP server and have a web UI to configure things like 
 Looking at my box's current IP, I know my network is `192.168.0.0`. Therefore, my router will be at `192.168.0.1`.
 
 I enter the IP address into my laptop's web browser and am greeted with a login.
-hosts: mymachines mdns_minimal [NOTFOUND=return] resolve files myhostname dns
 ![router login](/ssh/router_login.png)
 
 From here, I can see all devices connected to my network, and I copy the MAC address for my box.

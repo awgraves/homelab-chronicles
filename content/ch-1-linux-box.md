@@ -59,7 +59,7 @@ Lastly, I copy the debian ISO onto my drive with `sudo dd if=./debian.iso of=/de
 
 After attaching the USB to the Dell along with a spare monitor and keyboard, I turn on the power and hit f12 to enter the boot menu.
 
-![boot menu](/linux-box/boot_menu.jhosts: mymachines mdns_minimal [NOTFOUND=return] resolve files myhostname dnspg)
+![boot menu](/linux-box/boot_menu.jpg)
 
 From here I select the USB drive as the boot device and enter the Debian installer.
 
