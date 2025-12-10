@@ -62,20 +62,21 @@ This is not expected.
 
 ![ping and nslookup fails](/dns/ping_and_nslookup.png)
 
-Inspecting my `/etc/resolv.conf` reveals that systemd-resolved is handling my DNS config.
+Inspecting my `/etc/resolv.conf` reveals my DNS is handled by systemd-resolved.
+
 ![resolv conf](/dns/resolv_conf.png)
 
 I edit the config at `/etc/systemd/resolved.conf` and manually set my primary & fallback DNS.
 
 ![resolved conf](/dns/resolved_conf.png)
 
-Nslookup works correctly after a restart!
+After my config is reloaded, nslookup works correctly!
 
 ![nslookup correct](/dns/nslookup_correct.png)
 
 But I'm still unable to ping.
 
-I learn that ping resolves hosts using a config at `/etc/nsswitch.conf`.
+I learn that ping resolves hosts using a separate config at `/etc/nsswitch.conf`.
 
 The "[NOTFOUND=return]" on the hosts line is blocking fallback to my DNS (which happens later in this list).
 
