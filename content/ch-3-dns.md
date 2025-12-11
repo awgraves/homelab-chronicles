@@ -46,15 +46,15 @@ I reload the config changes by restarting dnsmaq.
 
 ### Router Update
 
-Last step, I update my router settings and configure my linux box IP as the primary DNS.
+I configure my linux box IP as the primary DNS.
 
 ![update router dns settings](/dns/router_dns_setting.png)
 
-My router does a full restart so the changes take effect.
+My router does a full restart and changes should be in effect.
 
 ## Troubleshooting
 
-At first I'm unable to ping `homelab.lan` from my laptop.
+At first, I'm unable to ping `homelab.lan` from my laptop.
 
 I run an `nslookup` on the domain and notice that it's using `127.0.0.53` as my DNS.
 
@@ -70,7 +70,7 @@ I edit the config at `/etc/systemd/resolved.conf` and manually set my primary & 
 
 ![resolved conf](/dns/resolved_conf.png)
 
-After my config is reloaded, nslookup works correctly!
+After my config is reloaded, nslookup works!
 
 ![nslookup correct](/dns/nslookup_correct.png)
 

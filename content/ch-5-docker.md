@@ -11,7 +11,9 @@ bookFlatSection: true
 
 Containerization is awesome.
 
-I want to build and host my own Docker images.
+I want to build and run my own Docker images, 
+
+starting with a self-hosted image registry!
 
 ## Docker Engine
 
@@ -46,7 +48,7 @@ However, I can DIY this!
 
 ## Self-hosted Registry
 
-Docker has an officially supported ["registry"](https://hub.docker.com/_/registry) image for self-hosting.
+Docker has an officially supported ["registry"](https://hub.docker.com/_/registry) image.
 
 The docs include [setup instructions for using an nginx reverse proxy](https://distribution.github.io/distribution/recipes/nginx/) to handle TLS.
 

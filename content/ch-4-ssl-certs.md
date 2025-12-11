@@ -99,3 +99,5 @@ then move it to `/etc/ca-certificates/trust-source/anchors/homelab-ca.crt`.
 Running `sudo update-ca-trust extract` tells my system to reload the trusted list.
 
 ![trust CA cert](/ssl/add_ca_cert_to_trust.png)
+
+Phew! Tedious, but complete.
