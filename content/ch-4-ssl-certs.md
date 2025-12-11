@@ -64,7 +64,7 @@ This specifies I want a wildcard cert that I can share across subdomains.
 
 ### Server Cert
 
-After entering the encryption password for the CA's key, my cert.pem file is generated.
+After entering the encryption password to use my CA's key, my cert.pem file is generated.
 
 ![server cert](/ssl/server_cert.png)
 
@@ -100,4 +100,4 @@ Running `sudo update-ca-trust extract` tells my system to reload the trusted lis
 
 ![trust CA cert](/ssl/add_ca_cert_to_trust.png)
 
-Phew! Tedious, but complete.
+Phew! Tedious, but soon to be worth it.
