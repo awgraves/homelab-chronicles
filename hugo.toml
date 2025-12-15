@@ -6,6 +6,7 @@ enableGitInfo = true
 
 [params]
   BookSection = '*'
+  BookSearch = false
 
 [markup]
   [markup.goldmark]
