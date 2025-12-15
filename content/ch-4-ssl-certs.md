@@ -8,7 +8,7 @@ bookFlatSection: true
 
 # SSL Certs
 
-Future services on my box will require [TLS](https://www.cloudflare.com/learning/ssl/transport-layer-security-tls/) (Transport Layer Security).
+Future services on my box will require Transport Layer Security ([TLS](https://www.cloudflare.com/learning/ssl/transport-layer-security-tls/)).
 
 For this, I'll need to generate some SSL certificates.
 
@@ -16,9 +16,9 @@ For this, I'll need to generate some SSL certificates.
 
 [This free, open-source tool](https://github.com/openssl/openssl) came with my Debian install.
 
-It'll work, though its hard to remember all the steps.
+It'll work, though its a bit arcane.
 
-I follow along with a great youtube tutorial [here](https://www.youtube.com/watch?v=VH4gXcvkmOY).
+I follow along with a youtube tutorial [here](https://www.youtube.com/watch?v=VH4gXcvkmOY).
 
 ## Certificate Authority 
 
@@ -44,49 +44,47 @@ For convenience, I set the expiration to 10 years.
 
 ## Server Cert & Key
 
-Now that I have a CA, I can set up the SSL cert and private key for my homelab server.
+The key and the cert will be linked, just like for the CA.
 
-### Private Key
+However, I'll need to create a Cert Sign Request first so my CA can sign and vouch for my identity.
 
-This is done with `sudo openssl genrsa -out cert-key.pem 4096`
+### Private Key + Cert Sign Request
 
-### Cert Sign Request
+I create both a new private key + a certificate sign request in a single command.
 
-Next I create a signing request with: 
+![generate csr and sever key](/ssl/generate_csr_and_server_key.png)
 
-`sudo openssl req -new -sha256 -subj "/CN=homelab" -key cert-key.pem -out cert.csr`
+- `homelab.key` will be my server's private key
+- `homelab.csr` will be my cert sign request.
+- My SANs are "*.homelab.lan" and "homelab.lan" to cover both root and subdomains.
 
-I also create a new file called `extfile.cnf` with the following content:
+I specify those same SANs as line in a new  `extfile.cnf` file as it will help in the next step:
 
-`subjectAltName=DNS:*.homelab.lan:192.168.0.17`
+`subjectAltName=DNS:*.homelab.lan,DNS:homelab.lan`
 
-This specifies I want a wildcard cert that I can share across subdomains.
+### Signing the Cert
 
-### Server Cert
+Now I can use my CA to sign the cert passing in my CSR and that `extfile.cnf` as inputs.
 
-After entering the encryption password to use my CA's key, my cert.pem file is generated.
+A `homelab.crt` is the ouput, which is also valid for 10 years.
 
-![server cert](/ssl/server_cert.png)
+![signed SSL cert](/ssl/signed_cert.png)
 
 ### Full Chain Cert
 
-Now I combine the server cert together with the CA cert to create the full chain cert.
+The `homelab.crt` on its own is not enough.
 
-This is important so the client (my laptop) can receive both certs at once,
+I need to append the CA cert and create a "full chain" showing which CA signed it.
 
-and know which CA had signed my server's cert so it can validate the signature.
-
-I give it an easier name to recognize: `Homelab.pem`
-
-![fullchain cert](/ssl/homelab_pem.png)
+The full chain is created by just appending with `sudo cat ca.pem >> homelab.crt`.
 
 ### Cleanup
 
 I move my cert and private key into their corresponding dirs.
 
-`sudo mv Homelab.pem /etc/ssl/certs`
+`sudo mv homelab.crt /etc/ssl/certs`
 
-`sudo mv cert-key.pem /etc/ssl/private`
+`sudo mv homelab.key /etc/ssl/private`
 
 ## CA Trust
 
@@ -100,4 +98,4 @@ Running `sudo update-ca-trust extract` tells my system to reload the trusted lis
 
 ![trust CA cert](/ssl/add_ca_cert_to_trust.png)
 
-Phew! Tedious, but soon to be worth it.
+Phew! Tedious, but soon to be worth it to have TLS.
