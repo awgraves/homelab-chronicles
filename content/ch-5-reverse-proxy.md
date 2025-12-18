@@ -56,7 +56,7 @@ I'll want my Nginx to eventually route to other containerized services.
 
 Therefore, I'll head straight for a `docker-compose.yaml` file so I can extend it later.
 
-I init a new git repo in my home dir to track this file, then enter the following:
+I init a new [git repo](https://github.com/awgraves/homelab) in my home dir to track this file, then enter the following:
 
 ![docker compose nginx](/reverse-proxy/docker-compose-nginx.png)
 
@@ -92,7 +92,7 @@ Now the moment of truth!
 
 I type in `homelab.lan` on my laptop's web browser...
 
-And am greeted with a security warning. 👀
+...and am greeted with a security warning. 👀
 
 ![brave browser warning](/reverse-proxy/brave-warning.png)
 
@@ -104,13 +104,15 @@ Luckily I can manually import a CA cert into Brave's trusted list via the settin
 
 After a page reload, I see the Nginx greeting!
 
+No more full screen warning.
+
 ![nginx greeting](/reverse-proxy/nginx-greeting.png)
 
-As another security measure, Brave browser shows an 'X' in the address bar.
+Brave browser does, however, still show an 'X' in the address bar.
 
-This is because my CA is not a public one, but it does consider my SSL cert as valid,
+This is because my CA is not a public one. 
 
-and it no longer includes the full page warning.
+But, it does consider my SSL cert as valid,
 
 ![brave browser valid cert](/reverse-proxy/browser_valid_cert.png)
 
@@ -118,7 +120,7 @@ and it no longer includes the full page warning.
 
 I want my reverse proxy to always start up whenever my box boots up.
 
-Sounds like a job for systemd!
+Sounds like a job for systemd.
 
 ### Config
 
@@ -126,9 +128,13 @@ I create a new `homelab.service` file in my repo:
 
 ![homelab service file](/reverse-proxy/homelab-service.png)
 
+For convenience, I'm still setting a working dir under my home dir.
+
+This spares me from needing to use sudo to edit the relevant files.
+
 ### Symlink
 
-Symlink it to the dir where systemd will look for it:
+I create a symlink to this file from the dir where systemd will look for it:
 
 ![homelab service file symlinked](/reverse-proxy/homelab-service-symlink.png)
 
@@ -138,4 +144,6 @@ Reload systemd daemon, enable, then start the service:
 
 ![homelab service enabled](/reverse-proxy/homelab-service-enabled.png)
 
-My reverse proxy is enabled and ready!
+My reverse proxy is all set!
+
+You can see the relevant files for this chapter in my commit [here](https://github.com/awgraves/homelab/commit/de6577f3cdb5cf02bb91a55135e2b24cf86e59ea).
