@@ -93,7 +93,7 @@ and confirm the new registry container is running:
 
 Lastly, I'll need to update my network's DNS to resolve the new subdomain!
 
-I set up dnsmasq as my DNS in [Ch 3](/ch-3-dns),
+I had set up dnsmasq as my DNS in [Ch 3](/ch-3-dns),
 
 so I simply add a new line on my homelab box's `/etc/hosts` file:
 
@@ -137,7 +137,7 @@ then force docker to fetch it from my registry with a docker run:
 
 ### Docker Cred Store
 
-Storing my passwords in plain text is not ever a good idea.
+Storing my passwords in plain text is never a good idea.
 
 So I [follow the link](https://docs.docker.com/go/credential-store) in the warning from Docker and configure [pass](https://www.passwordstore.org/) as my cred store.
 
