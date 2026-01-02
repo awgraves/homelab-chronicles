@@ -74,14 +74,6 @@ After my config is reloaded, nslookup works!
 
 ![nslookup correct](/dns/nslookup_correct.png)
 
-But I'm still unable to ping.
-
-I learn that ping resolves hosts using a separate config at `/etc/nsswitch.conf`.
-
-The "[NOTFOUND=return]" on the hosts line is blocking fallback to my DNS (which happens later in this list).
-
-![problem nsswitch](/dns/problem_nsswitch.png)
-
-So I remove that early return, and success! `homelab.lan` is reachable.
+`homelab.lan` is reachable.
 
 ![ping homelab.lan](/dns/ping_working.png)
