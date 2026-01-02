@@ -23,9 +23,3 @@ Areas of interest include:
 - Kubernetes
 - CI/CD pipelines
 - CLI tools
-
-[GitHub repo](https://github.com/awgraves/homelab)
-
-### Professional Links:
-- [Work portfolio](https://awgraves.work)
-- [LinkedIn](https://www.linkedin.com/in/awgraves/)
